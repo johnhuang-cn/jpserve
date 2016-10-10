@@ -1,0 +1,9 @@
+*.class
+/Magpie-PyServe/magpie/__pycache__/
+/Magpie-JClient/target/classes/
+# /Magpie-JClient/.settings/
+
+# Package Files #
+*.jar
+*.war
+*.ear
