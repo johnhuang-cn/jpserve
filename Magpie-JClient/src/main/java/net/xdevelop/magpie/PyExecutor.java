@@ -96,7 +96,8 @@ public class PyExecutor {
 	}
 	
 	private String streamToString(InputStream in) throws IOException, PyServeException {
-		OutputStreamWriter out = new OutputStreamWriter(new ByteArrayOutputStream(8192));
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		OutputStreamWriter out = new OutputStreamWriter(bout);
 		InputStreamReader input = new InputStreamReader(in);
 		
 		char[] buffer = new char[8192];
@@ -111,6 +112,7 @@ public class PyExecutor {
         if (count > MAX_SCRIPT_SIZE) {
         	throw new PyServeException("Exceed the max script size limit (8M).");
         }
-        return out.toString();		
+        out.flush();
+        return bout.toString();		
 	}
 }
