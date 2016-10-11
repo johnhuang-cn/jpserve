@@ -7,11 +7,15 @@ Jpserve provides a simple and high performance way to execute Python script in J
 
 # Quick Start
 ## Python Side
-Open Python console, import jpserve and start the JPServe:
+- Install jpserve Package
+```
+pip install jpserve
+```
+- Start the JPServe
 ```
 >>> from jpserve.jpserve import JPServe
->>> server = JPServe(("localhost", 8888))
->>> server.start()
+>>> serve = JPServe(("localhost", 8888))
+>>> serve.start()
 
 INFO:JPServe:JPServe starting...
 INFO:JPServe:JPServe listening in localhost 8888
