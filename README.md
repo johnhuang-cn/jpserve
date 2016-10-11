@@ -46,11 +46,11 @@ Result: 6
 
 # Execute Python Script File
 ```
-    File f = new File("src/test/java/net/xdevelop/jpclient/test/helloworld.py");
-    PyResult rs = PyServeContext.getExecutor().exec(f);
+File f = new File("src/test/java/net/xdevelop/jpclient/test/helloworld.py");
+PyResult rs = PyServeContext.getExecutor().exec(f);
 
-    InputStream in = ClientSample.class.getResourceAsStream("helloworld.py");
-    PyResult rs = PyServeContext.getExecutor().exec(in);
+InputStream in = ClientSample.class.getResourceAsStream("helloworld.py");
+PyResult rs = PyServeContext.getExecutor().exec(in);
 ```
 
 # Handle Complex Return Type
