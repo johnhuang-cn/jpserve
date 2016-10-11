@@ -1,16 +1,16 @@
-# Magpie
+# jpserve
 Magpie enable you calling Python from JAVA. Now it includes 2 parts: PyServe and JClient. PyServe is a script execute server running on Python side, and JClient is the JAVA API used to execute Python script.
 
 # Quick Start
 ## Python Side
 Open Python console, import magpie and start the PyServe:
 ```
->>> from magpie.pyserve import PyServe
->>> server = PyServe(("localhost", 8888))
+>>> from jpserve.jpserve import JPServe
+>>> server = JPServe(("localhost", 8888))
 >>> server.start()
 
-INFO:pserve:Magpie magpie starting...
-INFO:pserve:Magpie magpie listening in localhost 8888 
+INFO:JPServe:JPServe starting...
+INFO:JPServe:JPServe listening in localhost 8888
 ```
 ## JAVA Side
 ```
