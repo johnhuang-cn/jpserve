@@ -1,0 +1,9 @@
+MANIFEST.in
+README.txt
+setup.py
+jpserve/__init__.py
+jpserve/jpserve.py
+jpserve.egg-info/PKG-INFO
+jpserve.egg-info/SOURCES.txt
+jpserve.egg-info/dependency_links.txt
+jpserve.egg-info/top_level.txt
