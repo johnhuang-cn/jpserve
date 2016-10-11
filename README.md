@@ -53,7 +53,7 @@ Result: 6
     PyResult rs = PyServeContext.getExecutor().exec(in);
 ```
 
-# Complex Return Type
+# Handle Complex Return Type
 JPServe uses json.dumps to convert the _result_ value to JSON string, so JAVA can deserializes the result to JAVA object.
 ```
 String script = "a = 2\n"
