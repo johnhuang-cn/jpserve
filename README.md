@@ -8,41 +8,58 @@ Jpserve provides a simple and high performance way to execute Python script in J
 ## Quick Start
 ### Python Side
 - Install jpserve Package
-```
-pip install jpserve
-```
+  ```
+  pip install jpserve
+  ```
 - Start the JPServe
-```
->>> from jpserve.jpserve import JPServe
->>> serve = JPServe(("localhost", 8888))
->>> serve.start()
+  ```
+  >>> from jpserve.jpserve import JPServe
+  >>> serve = JPServe(("localhost", 8888))
+  >>> serve.start()
 
-INFO:JPServe:JPServe starting...
-INFO:JPServe:JPServe listening in localhost 8888
-```
+  INFO:JPServe:JPServe starting...
+  INFO:JPServe:JPServe listening in localhost 8888
+  ```
 ### JAVA Side
-```
-// init the PyServeContext, it will make a connection to PyServe
-PyServeContext.init("localhost", 8888);
+- Prerequisites
+  1. JPserve Maven package are under preparing, so before it, please download and add jpserve-jclient-0.1.0.jar to your project
+  2. jackson library is required
+    ```
+  <properties>
+    <jackson.version>2.7.0</jackson.version>
+  </properties>
 
-// prepare the script, and assign the return value to _result_
-String script = "a = 2\n"
-              + "b = 3\n"
-              + "_result_ = a * b";
+  <dependencies>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+  </dependencies>
+    ```
+- Sample code
+  ```
+  // init the PyServeContext, it will make a connection to PyServe
+  PyServeContext.init("localhost", 8888);
 
-// sned the script to PyServe, it returns the final result
-PyResult rs = executor.exec(s);
+  // prepare the script, and assign the return value to _result_
+  String script = "a = 2\n"
+                + "b = 3\n"
+                + "_result_ = a * b";
 
-// check if the execution is success
-if (rs.isSuccess()) {
-  System.out.println("Result: " + rs.getResult()); // get the _result_ value
-}
-else {
-  System.out.println("Execute python script failed: " + rs.getMsg());
-}              
-------------------------
-Result: 6
-```
+  // sned the script to PyServe, it returns the final result
+  PyResult rs = executor.exec(s);
+
+  // check if the execution is success
+  if (rs.isSuccess()) {
+    System.out.println("Result: " + rs.getResult()); // get the _result_ value
+  }
+  else {
+    System.out.println("Execute python script failed: " + rs.getMsg());
+  }              
+  ------------------------
+  Result: 6
+  ```
 
 ## Execute Python Script File
 ```
