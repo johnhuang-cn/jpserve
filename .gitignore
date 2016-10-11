@@ -1,8 +1,6 @@
 *.class
-/Magpie-PyServe/magpie/__pycache__/
-/Magpie-JClient/target/classes/
-/Magpie-JClient/target/test-classes/
-# /Magpie-JClient/.settings/
+/jpserve-jclient/target/classes/
+/jpserve-jclient/target/test-classes/
 
 # Package Files #
 *.jar
