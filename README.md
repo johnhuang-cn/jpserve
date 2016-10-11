@@ -21,6 +21,7 @@ Jpserve provides a simple and high performance way to execute Python script in J
   INFO:JPServe:JPServe starting...
   INFO:JPServe:JPServe listening in localhost 8888
   ```
+  
 ### JAVA Side
 - Prerequisites
   1. JPserve Maven package are under preparing, so before it, please download and add jpserve-jclient-0.1.0.jar to your project
