@@ -50,7 +50,7 @@ Jpserve provides a simple and high performance way to execute Python script in J
                 + "_result_ = a * b";
 
   // sned the script to PyServe, it returns the final result
-  PyResult rs = executor.exec(s);
+  PyResult rs = executor.exec(script);
 
   // check if the execution is success
   if (rs.isSuccess()) {
@@ -78,7 +78,7 @@ JPServe uses json.dumps to convert the _result_ value to JSON string, so JAVA ca
 String script = "a = 2\n"
               + "b = 3\n"
               + "_result_ = ["hello world", a, b, {"axb": a * b}]";
-PyResult rs = PyServeContext.getExecutor().exec(s);
+PyResult rs = PyServeContext.getExecutor().exec(script);
 
 if (rs.isSuccess()) {
     System.out.println("Result: " + rs.getResult());
