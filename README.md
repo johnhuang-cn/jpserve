@@ -24,7 +24,7 @@ Jpserve provides a simple and high performance way to execute Python script in J
 ### JAVA Side
 - Prerequisites
   1. JPserve Maven package are under preparing, so before it, please download and add jpserve-jclient-0.1.0.jar to your project
-  2. jackson library is required
+  2. [Jackson](https://github.com/FasterXML/jackson) library is required
     ```
   <properties>
     <jackson.version>2.7.0</jackson.version>
