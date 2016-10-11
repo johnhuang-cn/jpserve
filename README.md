@@ -41,7 +41,7 @@ Jpserve provides a simple and high performance way to execute Python script in J
     ```
 - Sample code
   ```
-  // init the PyServeContext, it will make a connection to PyServe
+  // init the PyServeContext, it will make a connection to JPServe
   PyServeContext.init("localhost", 8888);
 
   // prepare the script, and assign the return value to _result_
