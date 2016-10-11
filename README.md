@@ -47,10 +47,10 @@ Result: 6
 # Execute Python Script File
 ```
     File f = new File("src/test/java/net/xdevelop/jpclient/test/helloworld.py");
-		PyResult rs = PyServeContext.getExecutor().exec(f);
+    PyResult rs = PyServeContext.getExecutor().exec(f);
 
     InputStream in = ClientSample.class.getResourceAsStream("helloworld.py");
-		PyResult rs = PyServeContext.getExecutor().exec(in);
+    PyResult rs = PyServeContext.getExecutor().exec(in);
 ```
 
 # Complex Return Type
