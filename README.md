@@ -1,9 +1,13 @@
-# jpserve
-Magpie enable you calling Python from JAVA. Now it includes 2 parts: PyServe and JClient. PyServe is a script execute server running on Python side, and JClient is the JAVA API used to execute Python script.
+# JPServe
+
+Jpserve provides a simple and high performance way to execute Python script in JAVA. It includes PyServe and JClient API. 
+
+* PyServe is an execute server running on Python side and listening the execute requests from JAVA.
+* The JClient API can executes Python snippet or complete script file from java, it send the script to PyServe and get the execution result. The result is JSON format, so you can exchange the complex data between JAVA and Python flexibly.
 
 # Quick Start
 ## Python Side
-Open Python console, import magpie and start the PyServe:
+Open Python console, import jpserve and start the JPServe:
 ```
 >>> from jpserve.jpserve import JPServe
 >>> server = JPServe(("localhost", 8888))
@@ -38,7 +42,7 @@ Result: 6
 
 # Execute Python Script File
 ```
-    File f = new File("src/test/java/net/xdevelop/magpie/test/helloworld.py");
+    File f = new File("src/test/java/net/xdevelop/jpclient/test/helloworld.py");
 		PyResult rs = PyServeContext.getExecutor().exec(f);
 
     InputStream in = ClientSample.class.getResourceAsStream("helloworld.py");
@@ -46,7 +50,7 @@ Result: 6
 ```
 
 # Complex Return Type
-PyServe uses json.dumps to convert the _result_ value to JSON string, so JAVA can deserializes the result to JAVA object.
+JPServe uses json.dumps to convert the _result_ value to JSON string, so JAVA can deserializes the result to JAVA object.
 ```
 String script = "a = 2\n"
               + "b = 3\n"
