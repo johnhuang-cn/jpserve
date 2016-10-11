@@ -1,12 +1,12 @@
-# JPServe
+## JPServe: Calling Python from JAVA
 
 Jpserve provides a simple and high performance way to execute Python script in JAVA. It includes PyServe and JClient API. 
 
 * PyServe is an execute server running on Python side and listening the execute requests from JAVA.
 * The JClient API can executes Python snippet or complete script file from java, it send the script to PyServe and get the execution result. The result is JSON format, so you can exchange the complex data between JAVA and Python flexibly.
 
-# Quick Start
-## Python Side
+## Quick Start
+### Python Side
 - Install jpserve Package
 ```
 pip install jpserve
@@ -20,7 +20,7 @@ pip install jpserve
 INFO:JPServe:JPServe starting...
 INFO:JPServe:JPServe listening in localhost 8888
 ```
-## JAVA Side
+### JAVA Side
 ```
 // init the PyServeContext, it will make a connection to PyServe
 PyServeContext.init("localhost", 8888);
@@ -44,7 +44,7 @@ else {
 Result: 6
 ```
 
-# Execute Python Script File
+## Execute Python Script File
 ```
 File f = new File("src/test/java/net/xdevelop/jpclient/test/helloworld.py");
 PyResult rs = PyServeContext.getExecutor().exec(f);
@@ -53,7 +53,7 @@ InputStream in = ClientSample.class.getResourceAsStream("helloworld.py");
 PyResult rs = PyServeContext.getExecutor().exec(in);
 ```
 
-# Handle Complex Return Type
+## Handle Complex Return Type
 JPServe uses json.dumps to convert the _result_ value to JSON string, so JAVA can deserializes the result to JAVA object.
 ```
 String script = "a = 2\n"
