@@ -14,8 +14,15 @@ Python Side
 
 Open Python console, import jpserve and start the PyServe:
 
->>> from jpserve.jpserve import PyServe
->>> server = PyServe(("localhost", 8888))
+
+This 3 lines worked for me in Python 3.4.3 (default, Nov 17 2016, 01:08:31) [GCC 4.8.4] on linux
+import jpserve.jpserve as jp
+server = jp.JPServe(("localhost", 8888))
+server.start()
+
+This lines are too old (use the Readme.md from the parent directory or the lines I added before this comment
+>>> from jpserve.jpserve import PyServe #bad name, it changed to JPServe
+>>> server = PyServe(("localhost", 8888)) #bad name, it changed to JPServe
 >>> server.start()
 >>>
     INFO:pserve:starting...
