@@ -245,6 +245,6 @@ if __name__ == "__main__":
     host = "localhost"
     port = 8888
     addr = (host, port)  
-    jpserve = JPServe(addr, "D:\WorkSpace\JPserve\jpserve\jpserve\logs")
+    jpserve = JPServe(addr, "path\to\logs")
     jpserve.setLogLevel(logging.DEBUG)
     jpserve.start()
