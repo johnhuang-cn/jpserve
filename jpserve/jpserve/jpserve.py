@@ -40,6 +40,8 @@ import logging
 import os
 import threading
 import json
+import logging.handlers
+from pathlib import Path
 
 __all__ = ["JPServe"]
 
@@ -47,15 +49,46 @@ logger = logging.getLogger('JPServe')
 
 class JPServe():
 
-    def __init__(self, server_address):
+    def __init__(self, server_address, logAddress=None):
         self.server_address = server_address
-
         logging.basicConfig(level=logging.INFO)
         logger.setLevel(logging.INFO)
+        if logAddress:
+            self.initLogging(logAddress)
+
+
+    def initLogging(self, logPath):
+        '''
+        This method initialises logging object.
+        Takes log level and log path as input.
+        If log path is not provided, file creation for logs and initialization of log handler is not performed.
+        In case of presence of logPath, directory provided is created if it does not already exist and then logging
+        handler is initialised. handler is by default initialised as rotational handler with file size of 10 MB and
+        backup file count as 10.
+        :param level:
+        :param logPath:
+        :return:
+        '''
+        try:
+            global logger
+            if logPath != "":
+                if not os.path.exists(logPath):
+                    os.makedirs(logPath)
+
+                LOG_FILENAME = logPath + os.sep + 'jpserve.log'
+                # Add the log message handler to the logger
+                handler = logging.handlers.RotatingFileHandler(
+                    LOG_FILENAME, maxBytes=1024*1024*10, backupCount=10)
+
+                formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s',
+                                              datefmt='%Y-%m-%d %H:%M:%S')
+                handler.setFormatter(formatter)
+                logger.addHandler(handler)
+        except Exception as e:
+            print(str(e))
   
     def start(self):
-        logger.info("JPServe starting...")
-
+        global logger
         if os.name == 'nt':
             self.serv = PThreadingTCPServer(self.server_address, ServeHandler)
         else:
@@ -63,8 +96,7 @@ class JPServe():
 
         self.t = threading.Thread(target=self.serv.serve_forever)
         self.t.start()
-        
-        logger.info("JPServe listening in %s %s " % self.server_address)  
+        logger.debug("JPServe listening in %s %s " % self.server_address)
             
     def shutdown(self):
         try:
@@ -73,7 +105,7 @@ class JPServe():
         except Exception as e:
             logger.error(e.getMessage())
             
-        logger.info("JPServe stopped.")  
+        logger.debug("JPServe stopped.")
         
     def setLogLevel(self, level):
         logger.setLevel(level)
@@ -129,7 +161,7 @@ class ServeHandler(StreamRequestHandler):
                 # read begin mark #!{
                 begin_mark = self.rfile.readline().strip()
                 if (begin_mark == CMD_EXIT): # end request
-                    logger.info("Client (%s:%d) exit." % (self.client_address[0], self.client_address[1]))
+                    logger.debug("Client (%s:%d) exit." % (self.client_address[0], self.client_address[1]))
                     break
                 
                 if begin_mark != BEGIN_MARK:
@@ -147,7 +179,7 @@ class ServeHandler(StreamRequestHandler):
                         lines.append(data.decode("utf-8"))
                         
                 script = "".join(lines)
-                logger.info("Received script from (%s:%d): \n%s" % (self.client_address[0], self.client_address[1], script))
+                logger.debug("Received script from (%s:%d): \n%s" % (self.client_address[0], self.client_address[1], script))
             except Exception as e:
                 logger.error("Read request failed: %s" % str(e))
                 break
@@ -170,7 +202,7 @@ class ServeHandler(StreamRequestHandler):
             # response the result as JSON
             try:
                 response = self.toJSON(local_vars)
-                logger.info("return: %s" % response.decode("utf-8"))
+                logger.debug("return: %s" % response.decode("utf-8"))
 
                 self.wfile.write("#!{\r\n".encode("utf-8"))
                 self.wfile.write(response)
@@ -213,6 +245,6 @@ if __name__ == "__main__":
     host = "localhost"
     port = 8888
     addr = (host, port)  
-    jpserve = JPServe(addr)
+    jpserve = JPServe(addr, "path\to\logs")
+    jpserve.setLogLevel(logging.DEBUG)
     jpserve.start()
-    
